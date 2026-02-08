@@ -1,19 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace ProductApi.Models
+namespace ProductApi.DTOs.Product
 {
-    public class Product
+    public class ProductDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public string Description {get; set;} = string.Empty;
-        public DateTime CreatedOn {get; set;} = DateTime.UtcNow;
+        
     }
 }

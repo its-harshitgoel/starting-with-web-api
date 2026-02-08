@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProductApi.Data;
+using ProductApi.Mappers;
 
 namespace ProductApi.Controllers
 {
@@ -11,7 +12,7 @@ namespace ProductApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context; // why readonly and private and why _context?
         public ProductController(ApplicationDBContext context)
         {
             _context = context;
@@ -20,7 +21,8 @@ namespace ProductApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var products = _context.Product.ToList();
+            var products = _context.Product.ToList()
+            .Select(s => s.ToProductDto());
             return Ok(products);
         }
 
@@ -33,9 +35,8 @@ namespace ProductApi.Controllers
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(product.ToProductDto());
 
         }
-
     }
 }
