@@ -47,5 +47,37 @@ namespace ProductApi.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetById), new { id = productModel.Id }, productModel.ToProductDto());
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateProductRequestDto productDto)
+        {
+            var productModel = _context.Product.FirstOrDefault(x => x.Id == id);
+            if(productModel == null)
+            {
+                return NotFound();
+            }
+
+            productModel.Name = productDto.Name;
+            productModel.Price = productDto.Price;
+            productModel.Quantity = productDto.Quantity;
+
+            _context.SaveChanges();
+            return Ok(productModel.ToProductDto());
+        } 
+
+        [HttpDelete("{id}")]
+
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var productModel = _context.Product.FirstOrDefault(x => x.Id == id);
+            if(productModel == null)
+            {
+                return NotFound();
+            }
+            _context.Product.Remove(productModel);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
     }
 }
