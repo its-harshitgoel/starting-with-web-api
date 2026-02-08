@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProductApi.Data;
+using ProductApi.DTOs.Product;
 using ProductApi.Mappers;
 
 namespace ProductApi.Controllers
@@ -36,7 +37,15 @@ namespace ProductApi.Controllers
             }
 
             return Ok(product.ToProductDto());
+        }
 
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateProductRequestDto productDto)
+        {
+            var productModel = productDto.ToProductFromCreateDTO();
+            _context.Product.Add(productModel);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(GetById), new { id = productModel.Id }, productModel.ToProductDto());
         }
     }
 }

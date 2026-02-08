@@ -18,7 +18,16 @@ namespace ProductApi.Mappers
                 Name = productModel.Name,
                 Quantity = productModel.Quantity,
                 Price = productModel.Price,
-                Description = productModel.Description
+            };
+        }
+
+        public static Product ToProductFromCreateDTO(this CreateProductRequestDto productDto)
+        {
+            return new Product
+            {
+                Name = productDto.Name,
+                Quantity = productDto.Quantity,
+                Price = productDto.Price,
             };
         }
     }
