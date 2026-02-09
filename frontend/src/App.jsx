@@ -301,9 +301,9 @@ function App() {
                   <td>
                     <span className="badge">{p.quantity}</span>
                   </td>
-                  <td className="price">${p.price.toFixed(2)}</td>
+                  <td className="price">₹{p.price.toFixed(2)}</td>
                   <td className="total-value">
-                    ${(p.quantity * p.price).toFixed(2)}
+                    ₹{(p.quantity * p.price).toFixed(2)}
                   </td>
                   <td className="actions">
                     <button
