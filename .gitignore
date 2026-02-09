@@ -4,3 +4,8 @@ obj/
 
 # App secrets
 appsettings.Development.json
+.env
+
+# Node / React
+node_modules/
+build/
